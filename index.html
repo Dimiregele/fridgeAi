@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ro">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -76,45 +76,45 @@ textarea::placeholder{color:var(--muted)}
 </header>
 <main>
   <div class="hero">
-    <h1>Ce gatim din ce<br><em>ai in frigider?</em></h1>
-    <p>Scrie ingredientele pe care le ai — AI-ul gaseste retetele perfecte pentru tine.</p>
+    <h1>What can we cook with<br><em>what you have?</em></h1>
+    <p>Enter your ingredients and AI will find the perfect recipes for you.</p>
   </div>
   <div class="card">
     <div class="card-inner">
-      <textarea id="ing" placeholder="ex: oua, rosii, cascaval, paste, morcovi, usturoi, ulei..."></textarea>
-      <div class="pref-label">Preferinte</div>
+      <textarea id="ing" placeholder="e.g. eggs, tomatoes, cheese, pasta, carrots, garlic, olive oil..."></textarea>
+      <div class="pref-label">Preferences</div>
       <div class="prefs">
         <div class="chip" onclick="this.classList.toggle('on')">Vegetarian</div>
-        <div class="chip" onclick="this.classList.toggle('on')">Rapid</div>
-        <div class="chip" onclick="this.classList.toggle('on')">Fara gluten</div>
-        <div class="chip" onclick="this.classList.toggle('on')">Dieta</div>
-        <div class="chip" onclick="this.classList.toggle('on')">Copii</div>
-        <div class="chip" onclick="this.classList.toggle('on')">Simplu</div>
+        <div class="chip" onclick="this.classList.toggle('on')">Quick (&lt;20min)</div>
+        <div class="chip" onclick="this.classList.toggle('on')">Gluten-free</div>
+        <div class="chip" onclick="this.classList.toggle('on')">Diet</div>
+        <div class="chip" onclick="this.classList.toggle('on')">Kid-friendly</div>
+        <div class="chip" onclick="this.classList.toggle('on')">Simple</div>
       </div>
       <div class="portions-row">
-        <label>Numar de portii</label>
+        <label>Number of servings</label>
         <div class="portions-ctrl">
           <button class="pbtn" onclick="changeP(-1)">-</button>
           <div class="pval" id="pval">2</div>
           <button class="pbtn" onclick="changeP(1)">+</button>
         </div>
       </div>
-      <button class="btn-go" onclick="generate()">Gaseste retete</button>
+      <button class="btn-go" onclick="generate()">Find recipes</button>
     </div>
   </div>
   <div class="loading" id="loading">
     <div class="dots"><span></span><span></span><span></span></div>
-    <p>AI-ul cauta retete potrivite...</p>
+    <p>AI is finding the best recipes for you...</p>
   </div>
   <div class="results card" id="results">
     <div class="res-header">
-      <h2>Retetele tale</h2>
-      <button class="btn-reset" onclick="resetAll()">Incearca din nou</button>
+      <h2>Your recipes</h2>
+      <button class="btn-reset" onclick="resetAll()">Try again</button>
     </div>
     <div class="err" id="err"></div>
     <div class="rlist" id="rlist"></div>
   </div>
-  <p class="foot">Powered by Groq AI &middot; Llama 3.3 &middot; Complet gratuit<br>Ingredientele tale nu sunt salvate nicaieri</p>
+  <p class="foot">Powered by Groq AI &middot; Llama 3.3 &middot; Completely free<br>Your ingredients are never saved</p>
 </main>
 <script>
 var portions = 2;
@@ -129,7 +129,7 @@ function getPrefs() {
   var chips = document.querySelectorAll('.chip.on');
   var arr = [];
   chips.forEach(function(c) { arr.push(c.textContent); });
-  return arr.length > 0 ? arr.join(', ') : 'nicio preferinta';
+  return arr.length > 0 ? arr.join(', ') : 'no specific preferences';
 }
 
 function showErr(msg) {
@@ -167,13 +167,13 @@ function safeJSON(txt) {
 
 function generate() {
   var ing = document.getElementById('ing').value.trim();
-  if (!ing) { showErr('Te rugam sa introduci ingredientele.'); return; }
+  if (!ing) { showErr('Please enter your ingredients first.'); return; }
   var prefs = getPrefs();
   document.getElementById('loading').className = 'loading show';
   document.getElementById('results').className = 'results card';
   document.getElementById('err').className = 'err';
 
-  var prompt = 'Esti un chef profesionist. Ingrediente disponibile: ' + ing + '. Preferinte: ' + prefs + '. Portii: ' + portions + '. Genereaza 3 retete delicioase in romana folosind DOAR ingredientele de mai sus. Raspunde DOAR cu JSON valid, fara text inainte sau dupa: {"retete":[{"nume":"Numele retetei","timp":"X minute","dificultate":"Usor","ingrediente":"lista ingrediente cu cantitati","pasi":"Pasul 1: descriere completa. Pasul 2: descriere completa. Pasul 3: descriere completa."},{"nume":"Reteta 2","timp":"X minute","dificultate":"Mediu","ingrediente":"lista","pasi":"Pasul 1: ... Pasul 2: ... Pasul 3: ..."},{"nume":"Reteta 3","timp":"X minute","dificultate":"Usor","ingrediente":"lista","pasi":"Pasul 1: ... Pasul 2: ... Pasul 3: ..."}]}';
+  var prompt = 'You are a professional chef. Available ingredients: ' + ing + '. Preferences: ' + prefs + '. Servings: ' + portions + '. Generate 3 delicious recipes using ONLY the ingredients listed above. Reply ONLY with valid JSON, no text before or after: {"recipes":[{"name":"Recipe name","time":"X minutes","difficulty":"Easy","ingredients":"list of ingredients with quantities","steps":"Step 1: full description. Step 2: full description. Step 3: full description."},{"name":"Recipe 2","time":"X minutes","difficulty":"Medium","ingredients":"list","steps":"Step 1: ... Step 2: ... Step 3: ..."},{"name":"Recipe 3","time":"X minutes","difficulty":"Easy","ingredients":"list","steps":"Step 1: ... Step 2: ... Step 3: ..."}]}';
 
   fetch('https://api.groq.com/openai/v1/chat/completions', {
     method: 'POST',
@@ -183,41 +183,41 @@ function generate() {
   .then(function(r) { return r.json(); })
   .then(function(data) {
     document.getElementById('loading').className = 'loading';
-    if (data.error) { showErr('Eroare API: ' + data.error.message); return; }
+    if (data.error) { showErr('API Error: ' + data.error.message); return; }
     var txt = data.choices[0].message.content;
     var parsed = safeJSON(txt);
-    if (!parsed || !parsed.retete) { showErr('Eroare la procesare. Incearca din nou.'); return; }
-    showResults(parsed.retete);
+    if (!parsed || !parsed.recipes) { showErr('Processing error. Please try again.'); return; }
+    showResults(parsed.recipes);
   })
   .catch(function(err) {
     document.getElementById('loading').className = 'loading';
-    showErr('Eroare de conexiune. Verifica internetul.');
+    showErr('Connection error. Check your internet and try again.');
     console.error(err);
   });
 }
 
-function showResults(retete) {
+function showResults(recipes) {
   document.getElementById('err').className = 'err';
   var list = document.getElementById('rlist');
   list.innerHTML = '';
-  retete.forEach(function(r, i) {
+  recipes.forEach(function(r, i) {
     var card = document.createElement('div');
     card.className = 'rc';
-    var pasi = r.pasi.replace(/Pasul\s+\d+:/g, function(m) { return '<br><strong>' + m + '</strong>'; });
-    pasi = pasi.replace(/^<br>/, '');
+    var steps = r.steps.replace(/Step\s+\d+:/g, function(m) { return '<br><strong>' + m + '</strong>'; });
+    steps = steps.replace(/^<br>/, '');
     card.innerHTML =
       '<div class="rh">' +
-        '<div class="rt">' + (r.nume || 'Reteta ' + (i+1)) + '</div>' +
+        '<div class="rt">' + (r.name || 'Recipe ' + (i+1)) + '</div>' +
         '<div class="badges">' +
-          '<span class="badge t">' + (r.timp || '') + '</span>' +
-          '<span class="badge">' + (r.dificultate || '') + '</span>' +
+          '<span class="badge t">' + (r.time || '') + '</span>' +
+          '<span class="badge">' + (r.difficulty || '') + '</span>' +
         '</div>' +
       '</div>' +
       '<div class="rb" id="rb' + i + '">' +
-        '<h4>Ingrediente</h4><p>' + (r.ingrediente || '') + '</p>' +
-        '<h4>Mod de preparare</h4><p>' + pasi + '</p>' +
+        '<h4>Ingredients</h4><p>' + (r.ingredients || '') + '</p>' +
+        '<h4>Instructions</h4><p>' + steps + '</p>' +
       '</div>' +
-      '<div class="rtog" onclick="toggleR(' + i + ')"><span id="rt' + i + '">Vezi reteta</span></div>';
+      '<div class="rtog" onclick="toggleR(' + i + ')"><span id="rt' + i + '">View recipe</span></div>';
     list.appendChild(card);
   });
   document.getElementById('results').className = 'results card show';
@@ -228,7 +228,7 @@ function toggleR(i) {
   var b = document.getElementById('rb' + i);
   var t = document.getElementById('rt' + i);
   b.classList.toggle('open');
-  t.textContent = b.classList.contains('open') ? 'Ascunde' : 'Vezi reteta';
+  t.textContent = b.classList.contains('open') ? 'Hide' : 'View recipe';
 }
 
 function resetAll() {

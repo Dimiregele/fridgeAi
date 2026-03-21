@@ -827,26 +827,7 @@ async function generate() {
     }
     messages = [{
       role: 'user',
-      content: `Ești un chef profesionist. 
-
-Ingrediente disponibile: ${ing}
-Preferințe: ${prefs}
-Porții: ${portions}
-
-Generează exact 3 rețete în română folosind DOAR ingredientele de mai sus.
-
-Răspunde STRICT în acest format JSON (fără alte cuvinte înainte sau după):
-{
-  "retete": [
-    {
-      "nume": "Numele rețetei",
-      "timp": "X minute",
-      "dificultate": "Ușor/Mediu/Greu",
-      "ingrediente": "ingredientele necesare cu cantități",
-      "pasi": "Pasul 1: ...\nPasul 2: ...\nPasul 3: ..."
-    }
-  ]
-}`
+      content: 'Esti un chef profesionist. Ingrediente disponibile: ' + ing + '. Preferinte: ' + prefs + '. Portii: ' + portions + '. Genereaza exact 3 retete in romana folosind DOAR ingredientele de mai sus. Raspunde DOAR cu JSON valid fara text inainte sau dupa: {"retete":[{"nume":"Numele retetei","timp":"X minute","dificultate":"Usor","ingrediente":"lista ingrediente cu cantitati","pasi":"Pasul 1: descriere. Pasul 2: descriere. Pasul 3: descriere."}]}'
     }];
   }
 

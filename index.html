@@ -705,7 +705,7 @@
 let currentMode = 'photo';
 let imageBase64 = null;
 let portions = 2;
-let apiKey = localStorage.getItem('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') || '';
+let apiKey = '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';
 
 if (apiKey) updateApiStatus(true);
 
@@ -877,7 +877,8 @@ Răspunde STRICT în acest format JSON (fără alte cuvinte înainte sau după):
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${apiKey}`,
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Origin': 'https://localhost'
       },
       body: JSON.stringify({ model, messages, max_tokens: 1500, temperature: 0.7 })
     });

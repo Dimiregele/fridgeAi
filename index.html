@@ -705,7 +705,7 @@
 let currentMode = 'photo';
 let imageBase64 = null;
 let portions = 2;
-let apiKey = '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';
+let apiKey = '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';
 
 if (apiKey) updateApiStatus(true);
 
@@ -814,27 +814,7 @@ async function generate() {
         },
         {
           type: 'text',
-          text: `Ești un chef profesionist. Analizează această imagine a frigiderului/cămării.
-
-1. Identifică toate ingredientele vizibile
-2. Generează exact 3 rețete în română folosind DOAR ingredientele văzute
-
-Preferințe utilizator: ${prefs}
-Porții: ${portions}
-
-Răspunde STRICT în acest format JSON (fără alte cuvinte înainte sau după):
-{
-  "ingrediente_gasite": ["ingredient1", "ingredient2", "..."],
-  "retete": [
-    {
-      "nume": "Numele rețetei",
-      "timp": "X minute",
-      "dificultate": "Ușor/Mediu/Greu",
-      "ingrediente": "ingredientele necesare",
-      "pasi": "Pasul 1: ...\nPasul 2: ...\nPasul 3: ..."
-    }
-  ]
-}`
+          text: 'Esti un chef profesionist. Analizeaza imaginea frigiderului. Identifica ingredientele vizibile. Genereaza 3 retete in romana doar din ingredientele vazute. Preferinte: ' + prefs + '. Portii: ' + portions + '. Raspunde DOAR cu JSON valid: {"ingrediente_gasite":["ing1"],"retete":[{"nume":"Numele","timp":"X minute","dificultate":"Usor","ingrediente":"lista","pasi":"Pasul 1: desc. Pasul 2: desc."}]}'  
         }
       ]
     }];

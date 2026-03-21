@@ -7,7 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--bg:#F7F5F0;--surface:#FFFFFF;--border:#E8E4DC;--text:#1A1A18;--muted:#8A8880;--accent:#2D6A4F;--alight:#EAF4EE;--amid:#52B788;--warn:#E76F51;--r:16px}
+:root{--bg:#F7F5F0;--surface:#FFFFFF;--border:#E8E4DC;--text:#1A1A18;--muted:#8A8880;--accent:#2D6A4F;--alight:#EAF4EE;--amid:#52B788;--r:16px}
 body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
 header{padding:24px 32px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);background:var(--surface)}
 .logo{font-family:'DM Serif Display',serif;font-size:22px;color:var(--accent)}
@@ -17,22 +17,11 @@ main{max-width:680px;margin:0 auto;padding:32px 20px 60px}
 .hero h1{font-family:'DM Serif Display',serif;font-size:36px;line-height:1.15;margin-bottom:10px}
 .hero h1 em{color:var(--accent);font-style:italic}
 .hero p{font-size:15px;color:var(--muted);font-weight:300;line-height:1.6}
-.tabs{display:flex;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:4px;margin-bottom:24px;gap:4px}
-.tab{flex:1;padding:10px;border:none;border-radius:10px;background:transparent;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--muted);cursor:pointer;transition:all .2s}
-.tab.active{background:var(--accent);color:white;font-weight:500}
 .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;margin-bottom:16px}
 .card-inner{padding:24px}
-.upload-zone{border:2px dashed var(--border);border-radius:12px;padding:40px 20px;text-align:center;cursor:pointer;transition:all .2s;position:relative;background:var(--bg)}
-.upload-zone:hover{border-color:var(--accent);background:var(--alight)}
-.upload-zone input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
-.upload-icon{width:48px;height:48px;background:var(--alight);border-radius:12px;display:flex;align-items:center;justify-content:center;margin:0 auto 14px}
-.upload-icon svg{width:24px;height:24px;color:var(--accent)}
-.upload-zone h3{font-size:15px;font-weight:500;margin-bottom:4px}
-.upload-zone p{font-size:13px;color:var(--muted)}
-.preview-img{width:100%;max-height:260px;object-fit:cover;border-radius:10px;display:none;margin-bottom:12px}
-.remove-btn{background:none;border:1px solid var(--border);border-radius:8px;padding:5px 12px;font-size:12px;color:var(--muted);cursor:pointer;font-family:'DM Sans',sans-serif;display:none;margin-bottom:12px}
-textarea{width:100%;padding:14px 16px;border:1px solid var(--border);border-radius:12px;font-size:15px;font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);outline:none;resize:none;min-height:100px;transition:border-color .2s;line-height:1.6}
+textarea{width:100%;padding:14px 16px;border:1px solid var(--border);border-radius:12px;font-size:15px;font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);outline:none;resize:none;min-height:120px;transition:border-color .2s;line-height:1.6}
 textarea:focus{border-color:var(--accent)}
+textarea::placeholder{color:var(--muted)}
 .pref-label{font-size:12px;font-weight:500;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:10px;margin-top:20px}
 .prefs{display:flex;flex-wrap:wrap;gap:8px}
 .chip{padding:7px 14px;border-radius:40px;border:1px solid var(--border);background:var(--surface);font-size:13px;font-family:'DM Sans',sans-serif;color:var(--muted);cursor:pointer;transition:all .15s;user-select:none}
@@ -44,7 +33,7 @@ textarea:focus{border-color:var(--accent)}
 .pbtn{width:36px;height:36px;border:none;background:var(--bg);font-size:18px;cursor:pointer;color:var(--muted);font-family:'DM Sans',sans-serif;transition:background .15s;display:flex;align-items:center;justify-content:center}
 .pbtn:hover{background:var(--alight);color:var(--accent)}
 .pval{width:40px;text-align:center;font-size:15px;font-weight:500;border-left:1px solid var(--border);border-right:1px solid var(--border);padding:8px 0}
-.btn-go{width:100%;padding:15px;background:var(--accent);color:white;border:none;border-radius:12px;font-size:16px;font-family:'DM Sans',sans-serif;font-weight:500;cursor:pointer;transition:all .2s;margin-top:20px;display:flex;align-items:center;justify-content:center;gap:8px}
+.btn-go{width:100%;padding:15px;background:var(--accent);color:white;border:none;border-radius:12px;font-size:16px;font-family:'DM Sans',sans-serif;font-weight:500;cursor:pointer;transition:all .2s;margin-top:20px}
 .btn-go:hover:not(:disabled){background:#1e4d38;transform:translateY(-1px)}
 .btn-go:disabled{background:#b0c4bb;cursor:not-allowed}
 .loading{display:none;text-align:center;padding:40px 24px}
@@ -57,27 +46,26 @@ textarea:focus{border-color:var(--accent)}
 .loading p{font-size:14px;color:var(--muted);font-style:italic}
 .results{display:none}
 .results.show{display:block}
-.results-header{display:flex;align-items:center;justify-content:space-between;padding:20px 24px 0}
-.results-header h2{font-family:'DM Serif Display',serif;font-size:20px}
+.res-header{display:flex;align-items:center;justify-content:space-between;padding:20px 24px 0}
+.res-header h2{font-family:'DM Serif Display',serif;font-size:20px}
 .btn-reset{background:none;border:1px solid var(--border);border-radius:8px;padding:6px 12px;font-size:12px;color:var(--muted);cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s}
 .btn-reset:hover{border-color:var(--accent);color:var(--accent)}
-.recipes-list{padding:16px 24px 24px;display:grid;gap:12px}
-.recipe-card{border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:border-color .2s;cursor:pointer}
-.recipe-card:hover{border-color:var(--amid)}
-.rhead{padding:16px 18px 12px;display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
-.rtitle{font-family:'DM Serif Display',serif;font-size:17px;line-height:1.3;flex:1}
+.rlist{padding:16px 24px 24px;display:grid;gap:12px}
+.rc{border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:border-color .2s}
+.rc:hover{border-color:var(--amid)}
+.rh{padding:16px 18px 12px;display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.rt{font-family:'DM Serif Display',serif;font-size:17px;line-height:1.3;flex:1}
 .badges{display:flex;gap:6px;flex-shrink:0}
 .badge{padding:3px 9px;border-radius:20px;font-size:11px;font-weight:500;background:var(--alight);color:var(--accent)}
 .badge.t{background:#FFF3E0;color:#E65100}
-.rbody{padding:12px 18px 16px;border-top:1px solid var(--border);display:none}
-.rbody.open{display:block}
-.rbody h4{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:6px;margin-top:12px;font-weight:500}
-.rbody h4:first-child{margin-top:0}
-.rbody p{font-size:14px;color:var(--text);line-height:1.7}
-.rtoggle{padding:10px 18px;background:var(--bg);border-top:1px solid var(--border);font-size:12px;color:var(--accent);font-weight:500;text-align:center}
+.rb{padding:12px 18px 16px;border-top:1px solid var(--border);display:none}
+.rb.open{display:block}
+.rb h4{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:6px;margin-top:12px;font-weight:500}
+.rb h4:first-child{margin-top:0}
+.rb p{font-size:14px;color:var(--text);line-height:1.7}
+.rtog{padding:10px 18px;background:var(--bg);border-top:1px solid var(--border);font-size:12px;color:var(--accent);font-weight:500;text-align:center;cursor:pointer}
 .err{display:none;background:#FFF5F5;border:1px solid #FECACA;border-radius:12px;padding:16px 20px;margin:16px 24px;font-size:14px;color:#B91C1C}
 .err.show{display:block}
-.found-box{background:var(--alight);border-radius:10px;padding:12px 16px;margin-bottom:4px;font-size:13px;color:var(--accent)}
 .foot{text-align:center;font-size:12px;color:var(--muted);margin-top:32px;line-height:1.7}
 @media(max-width:500px){header{padding:18px 16px}main{padding:24px 12px 48px}.hero h1{font-size:28px}.card-inner{padding:18px}}
 </style>
@@ -89,61 +77,25 @@ textarea:focus{border-color:var(--accent)}
 <main>
   <div class="hero">
     <h1>Ce gatim din ce<br><em>ai in frigider?</em></h1>
-    <p>Fa o poza sau scrie ingredientele — AI-ul gaseste retetele perfecte pentru tine.</p>
+    <p>Scrie ingredientele pe care le ai — AI-ul gaseste retetele perfecte pentru tine.</p>
   </div>
-  <div class="tabs">
-    <button class="tab active" id="tab-photo" onclick="setMode('photo')">Scaneaza frigiderul</button>
-    <button class="tab" id="tab-text" onclick="setMode('text')">Scrie ingredientele</button>
-  </div>
-  <div class="card" id="mode-photo">
+  <div class="card">
     <div class="card-inner">
-      <img id="preview" class="preview-img" src="" alt="preview">
-      <button class="remove-btn" id="remove-btn" onclick="removeImg()">Sterge poza</button>
-      <div class="upload-zone" id="upload-zone">
-        <input type="file" id="file-input" accept="image/*" capture="environment" onchange="handleFile(this)">
-        <div class="upload-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
-        </div>
-        <h3>Fa o poza frigiderului</h3>
-        <p>sau apasa sa incarci o imagine</p>
-      </div>
+      <textarea id="ing" placeholder="ex: oua, rosii, cascaval, paste, morcovi, usturoi, ulei..."></textarea>
       <div class="pref-label">Preferinte</div>
-      <div class="prefs" id="prefs-photo">
-        <div class="chip" onclick="toggleChip(this)">Vegetarian</div>
-        <div class="chip" onclick="toggleChip(this)">Rapid</div>
-        <div class="chip" onclick="toggleChip(this)">Fara gluten</div>
-        <div class="chip" onclick="toggleChip(this)">Dieta</div>
-        <div class="chip" onclick="toggleChip(this)">Copii</div>
-        <div class="chip" onclick="toggleChip(this)">Simplu</div>
+      <div class="prefs">
+        <div class="chip" onclick="this.classList.toggle('on')">Vegetarian</div>
+        <div class="chip" onclick="this.classList.toggle('on')">Rapid</div>
+        <div class="chip" onclick="this.classList.toggle('on')">Fara gluten</div>
+        <div class="chip" onclick="this.classList.toggle('on')">Dieta</div>
+        <div class="chip" onclick="this.classList.toggle('on')">Copii</div>
+        <div class="chip" onclick="this.classList.toggle('on')">Simplu</div>
       </div>
       <div class="portions-row">
         <label>Numar de portii</label>
         <div class="portions-ctrl">
           <button class="pbtn" onclick="changeP(-1)">-</button>
-          <div class="pval" id="pval1">2</div>
-          <button class="pbtn" onclick="changeP(1)">+</button>
-        </div>
-      </div>
-      <button class="btn-go" onclick="generate()">Gaseste retete</button>
-    </div>
-  </div>
-  <div class="card" id="mode-text" style="display:none">
-    <div class="card-inner">
-      <textarea id="ing-text" placeholder="ex: oua, rosii, cascaval, paste, morcovi, usturoi..."></textarea>
-      <div class="pref-label">Preferinte</div>
-      <div class="prefs" id="prefs-text">
-        <div class="chip" onclick="toggleChip(this)">Vegetarian</div>
-        <div class="chip" onclick="toggleChip(this)">Rapid</div>
-        <div class="chip" onclick="toggleChip(this)">Fara gluten</div>
-        <div class="chip" onclick="toggleChip(this)">Dieta</div>
-        <div class="chip" onclick="toggleChip(this)">Copii</div>
-        <div class="chip" onclick="toggleChip(this)">Simplu</div>
-      </div>
-      <div class="portions-row">
-        <label>Numar de portii</label>
-        <div class="portions-ctrl">
-          <button class="pbtn" onclick="changeP(-1)">-</button>
-          <div class="pval" id="pval2">2</div>
+          <div class="pval" id="pval">2</div>
           <button class="pbtn" onclick="changeP(1)">+</button>
         </div>
       </div>
@@ -152,86 +104,40 @@ textarea:focus{border-color:var(--accent)}
   </div>
   <div class="loading" id="loading">
     <div class="dots"><span></span><span></span><span></span></div>
-    <p id="load-msg">AI-ul analizeaza frigiderul tau...</p>
+    <p>AI-ul cauta retete potrivite...</p>
   </div>
   <div class="results card" id="results">
-    <div class="results-header">
+    <div class="res-header">
       <h2>Retetele tale</h2>
       <button class="btn-reset" onclick="resetAll()">Incearca din nou</button>
     </div>
-    <div class="err" id="err-box"></div>
-    <div class="recipes-list" id="recipes-list"></div>
+    <div class="err" id="err"></div>
+    <div class="rlist" id="rlist"></div>
   </div>
-  <p class="foot">Powered by Groq AI &middot; Llama 3 &middot; Complet gratuit<br>Ingredientele tale nu sunt salvate nicaieri</p>
+  <p class="foot">Powered by Groq AI &middot; Llama 3.3 &middot; Complet gratuit<br>Ingredientele tale nu sunt salvate nicaieri</p>
 </main>
 <script>
-var mode = 'photo';
-var img64 = null;
 var portions = 2;
-var API_KEY = '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';
+var KEY = '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';
 
-function setMode(m) {
-  mode = m;
-  document.getElementById('mode-photo').style.display = m === 'photo' ? 'block' : 'none';
-  document.getElementById('mode-text').style.display = m === 'text' ? 'block' : 'none';
-  document.getElementById('tab-photo').className = 'tab' + (m === 'photo' ? ' active' : '');
-  document.getElementById('tab-text').className = 'tab' + (m === 'text' ? ' active' : '');
-  document.getElementById('results').className = 'results card';
-  document.getElementById('loading').className = 'loading';
-}
-
-function toggleChip(el) {
-  el.classList.toggle('on');
+function changeP(d) {
+  portions = Math.max(1, Math.min(10, portions + d));
+  document.getElementById('pval').textContent = portions;
 }
 
 function getPrefs() {
-  var id = mode === 'photo' ? 'prefs-photo' : 'prefs-text';
-  var chips = document.querySelectorAll('#' + id + ' .chip.on');
+  var chips = document.querySelectorAll('.chip.on');
   var arr = [];
   chips.forEach(function(c) { arr.push(c.textContent); });
   return arr.length > 0 ? arr.join(', ') : 'nicio preferinta';
 }
 
-function changeP(d) {
-  portions = Math.max(1, Math.min(10, portions + d));
-  document.getElementById('pval1').textContent = portions;
-  document.getElementById('pval2').textContent = portions;
-}
-
-function handleFile(input) {
-  var file = input.files[0];
-  if (!file) return;
-  var reader = new FileReader();
-  reader.onload = function(e) {
-    var url = e.target.result;
-    img64 = url.split(',')[1];
-    document.getElementById('preview').src = url;
-    document.getElementById('preview').style.display = 'block';
-    document.getElementById('upload-zone').style.display = 'none';
-    document.getElementById('remove-btn').style.display = 'inline-block';
-  };
-  reader.readAsDataURL(file);
-}
-
-function removeImg() {
-  img64 = null;
-  document.getElementById('preview').style.display = 'none';
-  document.getElementById('upload-zone').style.display = 'block';
-  document.getElementById('remove-btn').style.display = 'none';
-  document.getElementById('file-input').value = '';
-}
-
-function setLoad(on, msg) {
-  document.getElementById('loading').className = 'loading' + (on ? ' show' : '');
-  if (msg) document.getElementById('load-msg').textContent = msg;
-}
-
 function showErr(msg) {
-  var b = document.getElementById('err-box');
-  b.textContent = msg;
-  b.className = 'err show';
+  var e = document.getElementById('err');
+  e.textContent = msg;
+  e.className = 'err show';
   document.getElementById('results').className = 'results card show';
-  document.getElementById('recipes-list').innerHTML = '';
+  document.getElementById('rlist').innerHTML = '';
 }
 
 function safeJSON(txt) {
@@ -260,96 +166,60 @@ function safeJSON(txt) {
 }
 
 function generate() {
+  var ing = document.getElementById('ing').value.trim();
+  if (!ing) { showErr('Te rugam sa introduci ingredientele.'); return; }
   var prefs = getPrefs();
-  setLoad(true, mode === 'photo' ? 'AI-ul analizeaza frigiderul tau...' : 'AI-ul cauta retete potrivite...');
+  document.getElementById('loading').className = 'loading show';
   document.getElementById('results').className = 'results card';
-  document.getElementById('err-box').className = 'err';
+  document.getElementById('err').className = 'err';
 
-  var messages;
-  var model;
-
-  if (mode === 'photo') {
-    if (!img64) { setLoad(false); showErr('Te rugam sa adaugi o poza.'); return; }
-    model = 'llama-3.2-11b-vision-preview';
-    messages = [{
-      role: 'user',
-      content: [
-        { type: 'image_url', image_url: { url: 'data:image/jpeg;base64,' + img64 } },
-        { type: 'text', text: 'Esti un chef profesionist. Analizeaza imaginea frigiderului. Identifica ingredientele vizibile. Genereaza 3 retete in romana. Preferinte: ' + prefs + '. Portii: ' + portions + '. Raspunde DOAR cu JSON, fara text inainte sau dupa: {"ingrediente_gasite":["ing1","ing2"],"retete":[{"nume":"Numele retetei","timp":"X minute","dificultate":"Usor","ingrediente":"lista ingrediente","pasi":"Pasul 1: descriere. Pasul 2: descriere. Pasul 3: descriere."},{"nume":"Reteta 2","timp":"X minute","dificultate":"Mediu","ingrediente":"lista","pasi":"Pasul 1: ... Pasul 2: ..."},{"nume":"Reteta 3","timp":"X minute","dificultate":"Usor","ingrediente":"lista","pasi":"Pasul 1: ... Pasul 2: ..."}]}' }
-      ]
-    }];
-  } else {
-    var ing = document.getElementById('ing-text').value.trim();
-    if (!ing) { setLoad(false); showErr('Te rugam sa introduci ingredientele.'); return; }
-    model = 'llama-3.3-70b-versatile';
-    messages = [{
-      role: 'user',
-      content: 'Esti un chef profesionist. Ingrediente disponibile: ' + ing + '. Preferinte: ' + prefs + '. Portii: ' + portions + '. Genereaza 3 retete in romana folosind DOAR ingredientele de mai sus. Raspunde DOAR cu JSON, fara text inainte sau dupa: {"retete":[{"nume":"Numele retetei","timp":"X minute","dificultate":"Usor","ingrediente":"lista ingrediente cu cantitati","pasi":"Pasul 1: descriere. Pasul 2: descriere. Pasul 3: descriere."},{"nume":"Reteta 2","timp":"X minute","dificultate":"Mediu","ingrediente":"lista","pasi":"Pasul 1: ... Pasul 2: ..."},{"nume":"Reteta 3","timp":"X minute","dificultate":"Usor","ingrediente":"lista","pasi":"Pasul 1: ... Pasul 2: ..."}]}'
-    }];
-  }
+  var prompt = 'Esti un chef profesionist. Ingrediente disponibile: ' + ing + '. Preferinte: ' + prefs + '. Portii: ' + portions + '. Genereaza 3 retete delicioase in romana folosind DOAR ingredientele de mai sus. Raspunde DOAR cu JSON valid, fara text inainte sau dupa: {"retete":[{"nume":"Numele retetei","timp":"X minute","dificultate":"Usor","ingrediente":"lista ingrediente cu cantitati","pasi":"Pasul 1: descriere completa. Pasul 2: descriere completa. Pasul 3: descriere completa."},{"nume":"Reteta 2","timp":"X minute","dificultate":"Mediu","ingrediente":"lista","pasi":"Pasul 1: ... Pasul 2: ... Pasul 3: ..."},{"nume":"Reteta 3","timp":"X minute","dificultate":"Usor","ingrediente":"lista","pasi":"Pasul 1: ... Pasul 2: ... Pasul 3: ..."}]}';
 
   fetch('https://api.groq.com/openai/v1/chat/completions', {
     method: 'POST',
-    headers: {
-      'Authorization': 'Bearer ' + API_KEY,
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ model: model, messages: messages, max_tokens: 1500, temperature: 0.7 })
+    headers: { 'Authorization': 'Bearer ' + KEY, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ model: 'llama-3.3-70b-versatile', messages: [{ role: 'user', content: prompt }], max_tokens: 1500, temperature: 0.7 })
   })
   .then(function(r) { return r.json(); })
   .then(function(data) {
-    setLoad(false);
+    document.getElementById('loading').className = 'loading';
     if (data.error) { showErr('Eroare API: ' + data.error.message); return; }
-    var text = data.choices[0].message.content;
-    var parsed = safeJSON(text);
-    if (!parsed) { showErr('Eroare la procesarea raspunsului. Incearca din nou.'); return; }
-    showResults(parsed);
+    var txt = data.choices[0].message.content;
+    var parsed = safeJSON(txt);
+    if (!parsed || !parsed.retete) { showErr('Eroare la procesare. Incearca din nou.'); return; }
+    showResults(parsed.retete);
   })
   .catch(function(err) {
-    setLoad(false);
-    showErr('Eroare de conexiune. Verifica internetul si incearca din nou.');
+    document.getElementById('loading').className = 'loading';
+    showErr('Eroare de conexiune. Verifica internetul.');
     console.error(err);
   });
 }
 
-function showResults(data) {
-  document.getElementById('err-box').className = 'err';
-  var list = document.getElementById('recipes-list');
+function showResults(retete) {
+  document.getElementById('err').className = 'err';
+  var list = document.getElementById('rlist');
   list.innerHTML = '';
-
-  if (data.ingrediente_gasite && data.ingrediente_gasite.length > 0) {
-    var d = document.createElement('div');
-    d.className = 'found-box';
-    d.innerHTML = '<strong>Ingrediente identificate:</strong> ' + data.ingrediente_gasite.join(', ');
-    list.appendChild(d);
-  }
-
-  if (!data.retete || data.retete.length === 0) {
-    showErr('Nu s-au gasit retete. Incearca din nou.');
-    return;
-  }
-
-  data.retete.forEach(function(r, i) {
+  retete.forEach(function(r, i) {
     var card = document.createElement('div');
-    card.className = 'recipe-card';
+    card.className = 'rc';
+    var pasi = r.pasi.replace(/Pasul\s+\d+:/g, function(m) { return '<br><strong>' + m + '</strong>'; });
+    pasi = pasi.replace(/^<br>/, '');
     card.innerHTML =
-      '<div class="rhead">' +
-        '<div class="rtitle">' + r.nume + '</div>' +
+      '<div class="rh">' +
+        '<div class="rt">' + (r.nume || 'Reteta ' + (i+1)) + '</div>' +
         '<div class="badges">' +
-          '<span class="badge t">' + r.timp + '</span>' +
-          '<span class="badge">' + r.dificultate + '</span>' +
+          '<span class="badge t">' + (r.timp || '') + '</span>' +
+          '<span class="badge">' + (r.dificultate || '') + '</span>' +
         '</div>' +
       '</div>' +
-      '<div class="rbody" id="rb' + i + '">' +
-        '<h4>Ingrediente</h4>' +
-        '<p>' + r.ingrediente + '</p>' +
-        '<h4>Mod de preparare</h4>' +
-        '<p>' + r.pasi.replace(/Pasul/g, '<br>Pasul').replace(/^\s*<br>/, '') + '</p>' +
+      '<div class="rb" id="rb' + i + '">' +
+        '<h4>Ingrediente</h4><p>' + (r.ingrediente || '') + '</p>' +
+        '<h4>Mod de preparare</h4><p>' + pasi + '</p>' +
       '</div>' +
-      '<div class="rtoggle" onclick="toggleR(' + i + ')"><span id="rt' + i + '">Vezi reteta</span></div>';
+      '<div class="rtog" onclick="toggleR(' + i + ')"><span id="rt' + i + '">Vezi reteta</span></div>';
     list.appendChild(card);
   });
-
   document.getElementById('results').className = 'results card show';
   document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
@@ -363,8 +233,7 @@ function toggleR(i) {
 
 function resetAll() {
   document.getElementById('results').className = 'results card';
-  document.getElementById('ing-text').value = '';
-  removeImg();
+  document.getElementById('ing').value = '';
   document.querySelectorAll('.chip.on').forEach(function(c) { c.classList.remove('on'); });
 }
 </script>
